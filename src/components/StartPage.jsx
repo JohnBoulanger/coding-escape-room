@@ -10,7 +10,7 @@ export default function StartPage({ onStart }) {
       <div className="app__inner">
         <div className="start-page">
 
-          <h1 className="start-page__title">The Heist</h1>
+          <h1 className="start-page__title">The Harrington Heist</h1>
           <p className="start-page__subtitle">Harrington Federal Vault</p>
 
           <div className="start-page__story">

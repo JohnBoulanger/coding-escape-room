@@ -1,5 +1,5 @@
 // ── rooms.js ──────────────────────────────────────────────────────────────────
-// All 10 room definitions for The Heist.
+// All 10 room definitions for The Harrington Heist.
 //
 // Theme: You're locked inside Harrington Federal Vault. The job went sideways.
 // Crack 10 security layers in 30 minutes to assemble the master code and escape.

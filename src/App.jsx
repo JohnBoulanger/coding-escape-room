@@ -188,7 +188,7 @@ export default function App() {
       <div className="app">
         <div className="app__inner">
           <header className="app__header">
-            <h1 className="app__title">The Heist</h1>
+            <h1 className="app__title">The Harrington Heist</h1>
             <button className="challenge__submit-btn" onClick={handleExitReview}>
               ← Back to Results
             </button>
@@ -237,7 +237,7 @@ export default function App() {
 
         {/* Header */}
         <header className="app__header">
-          <h1 className="app__title">The Heist</h1>
+          <h1 className="app__title">The Harrington Heist</h1>
           <span className={`timer${isWarning ? ' timer--warning' : ''}`}>
             {formatTime(timeLeft)}
           </span>

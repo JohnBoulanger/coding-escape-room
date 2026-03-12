@@ -20,7 +20,7 @@ import { runPython } from '../utils/piston'
 export default function PythonChallenge({ room, onSolved, initialSolved = false }) {
   const [userInput, setUserInput] = useState(room.challenge)
   const [feedback, setFeedback]   = useState(
-    initialSolved ? { type: 'success', message: 'Output matched — key digit retrieved.' } : null
+    initialSolved ? { type: 'success', message: room.answer } : null
   )
   const [solved, setSolved]   = useState(initialSolved)
   const [loading, setLoading] = useState(false)
@@ -53,7 +53,7 @@ export default function PythonChallenge({ room, onSolved, initialSolved = false 
     }
 
     if (result.stdout === room.answer) {
-      setFeedback({ type: 'success', message: `Output: ${result.stdout} — key digit retrieved. Advancing...` })
+      setFeedback({ type: 'success', message: result.stdout })
       setSolved(true)
       setTimeout(() => onSolved(room.answer), 900)
     } else {
