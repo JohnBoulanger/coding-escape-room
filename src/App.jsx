@@ -86,12 +86,7 @@ export default function App() {
     setCodeResult(masterInput.join('') === CORRECT_CODE ? 'correct' : 'wrong')
   }
 
-  function handleEnterReview() {
-    setViewingRoom(0)
-    setGameState('reviewing')
-  }
-
-  function handleExitReview() {
+function handleExitReview() {
     setGameState('complete')
   }
 
@@ -162,21 +157,17 @@ export default function App() {
 
             <div className="clue-grid">
               {ROOMS.map((room, i) => (
-                <div key={i} className="clue-card">
+                <div
+                  key={i}
+                  className="clue-card clue-card--clickable"
+                  onClick={() => { setViewingRoom(i); setGameState('reviewing') }}
+                >
                   <div className="clue-card__number">Layer {i + 1}</div>
                   <div className="clue-card__title">{room.clue.title}</div>
                   <div className="clue-card__hint">{room.clue.hint}</div>
                 </div>
               ))}
             </div>
-
-            <button
-              className="challenge__submit-btn"
-              style={{ marginTop: '1.5rem' }}
-              onClick={handleEnterReview}
-            >
-              Review Layers
-            </button>
           </div>
         </div>
       </div>

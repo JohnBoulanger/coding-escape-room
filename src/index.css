@@ -1,21 +1,21 @@
 /* ── CSS custom properties ── */
 :root {
-  --color-bg: #f0f2f5;
-  --color-card: #ffffff;
-  --color-border: #d1d5db;
-  --color-text: #1f2937;
-  --color-muted: #6b7280;
-  --color-primary: #3b82f6;
-  --color-primary-hover: #2563eb;
-  --color-primary-light: #eff6ff;
-  --color-success-text: #166534;
-  --color-success-bg: #dcfce7;
-  --color-success-border: #86efac;
-  --color-error-text: #991b1b;
-  --color-error-bg: #fee2e2;
-  --color-error-border: #fca5a5;
-  --color-code-bg: #f8f9fa;
-  --color-timer-warn: #dc2626;
+  --color-bg: #0d0e12;
+  --color-card: #161820;
+  --color-border: #272a35;
+  --color-text: #dde1ec;
+  --color-muted: #5c6478;
+  --color-primary: #dc2626;
+  --color-primary-hover: #b91c1c;
+  --color-primary-light: #250f0f;
+  --color-success-text: #4ade80;
+  --color-success-bg: #052e16;
+  --color-success-border: #14532d;
+  --color-error-text: #f87171;
+  --color-error-bg: #2d0f0f;
+  --color-error-border: #7f1d1d;
+  --color-code-bg: #0b0c10;
+  --color-timer-warn: #ef4444;
   --font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
   --font-mono: 'Courier New', Courier, monospace;
   --radius: 6px;
@@ -66,16 +66,20 @@ body {
 }
 
 /* ── Timer ── */
+@keyframes timerBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.35; }
+}
+
 .timer {
-  font-family: var(--font-mono);
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 700;
-  color: var(--color-muted);
-  letter-spacing: 0.04em;
+  color: var(--color-primary);
 }
 
 .timer--warning {
   color: var(--color-timer-warn);
+  animation: timerBlink 0.9s ease-in-out infinite;
 }
 
 /* ── NavBar ── */
@@ -104,8 +108,8 @@ body {
 /* Locked — grayed out, not clickable */
 .nav-bar__btn--locked {
   background: var(--color-bg);
-  color: #c4c9d4;
-  border-color: #e5e7eb;
+  color: #252831;
+  border-color: #1e2028;
   cursor: not-allowed;
 }
 
@@ -189,7 +193,7 @@ body {
 
 .master-key__slot--hidden {
   background: var(--color-bg);
-  color: #c4c9d4;
+  color: #252831;
 }
 
 .master-key__hint {
@@ -216,7 +220,7 @@ body {
   font-size: 0.85rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  color: var(--color-muted);
+  color: var(--color-primary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -263,7 +267,7 @@ body {
   border-radius: var(--radius);
   padding: 0.55rem 0.75rem;
   color: var(--color-text);
-  background: var(--color-card);
+  background: var(--color-code-bg);
   outline: none;
   transition: border-color 0.15s;
 }
@@ -291,15 +295,16 @@ body {
 }
 
 .code-editor-wrap--disabled {
-  opacity: 0.65;
+  opacity: 0.75;
   pointer-events: none;
 }
 
-/* Match the app's font and colour scheme */
+/* Dark theme for CodeMirror */
 .code-editor-wrap .cm-editor {
   font-family: var(--font-mono);
   font-size: 0.83rem;
   background: var(--color-code-bg);
+  color: var(--color-text);
 }
 
 .code-editor-wrap .cm-focused {
@@ -307,9 +312,9 @@ body {
 }
 
 .code-editor-wrap .cm-gutters {
-  background: #eef0f3;
+  background: #0e0f14;
   border-right: 1px solid var(--color-border);
-  color: #9ca3af;
+  color: #363a4a;
   font-size: 0.78rem;
 }
 
@@ -317,6 +322,15 @@ body {
   min-height: 160px;
   padding: 0.5rem 0;
 }
+
+.code-editor-wrap .cm-activeLine {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.code-editor-wrap .cm-activeLineGutter {
+  background: rgba(255, 255, 255, 0.04);
+}
+
 
 .challenge__submit-btn {
   font-family: var(--font-body);
@@ -332,8 +346,13 @@ body {
   transition: background 0.15s;
 }
 
-.challenge__submit-btn:hover {
+.challenge__submit-btn:hover:not(:disabled) {
   background: var(--color-primary-hover);
+}
+
+.challenge__submit-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 
 /* ── Feedback ── */
@@ -408,13 +427,14 @@ body {
   font-weight: 700;
   letter-spacing: -0.02em;
   margin-bottom: 0.2rem;
+  color: var(--color-text);
 }
 
 .start-page__subtitle {
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--color-muted);
+  color: var(--color-primary);
   margin-bottom: 1.5rem;
 }
 
@@ -461,8 +481,8 @@ body {
 }
 
 .end-screen--success {
-  background: var(--color-success-bg);
-  border-color: var(--color-success-border);
+  background: var(--color-card);
+  border-color: var(--color-border);
 }
 
 .end-screen--fail {
@@ -476,7 +496,7 @@ body {
   margin-bottom: 0.625rem;
 }
 
-.end-screen--success .end-screen__heading { color: var(--color-success-text); }
+.end-screen--success .end-screen__heading { color: var(--color-text); }
 .end-screen--fail    .end-screen__heading { color: var(--color-error-text); }
 
 .end-screen__body {
@@ -484,7 +504,7 @@ body {
   line-height: 1.5;
 }
 
-.end-screen--success .end-screen__body { color: var(--color-success-text); }
+.end-screen--success .end-screen__body { color: var(--color-muted); }
 .end-screen--fail    .end-screen__body { color: var(--color-error-text); }
 
 .end-screen__code-label {
@@ -520,7 +540,7 @@ body {
 }
 
 .end-screen__code-digit--hidden {
-  color: #c4c9d4;
+  color: #252831;
   border-color: var(--color-border);
 }
 
@@ -554,10 +574,10 @@ body {
   width: 44px;
   height: 48px;
   text-align: center;
-  background: var(--color-card);
+  background: var(--color-code-bg);
   border: 1px solid var(--color-border);
   border-radius: 4px;
-  color: var(--color-text);
+  color: var(--color-primary);
   outline: none;
   transition: border-color 0.15s;
 }
@@ -575,6 +595,7 @@ body {
   background: var(--color-success-bg);
   border-color: var(--color-success-border);
   color: var(--color-success-text);
+  text-shadow: 0 0 6px rgba(74, 222, 128, 0.5);
 }
 
 .code-entry__feedback {
@@ -611,10 +632,19 @@ body {
 }
 
 .clue-card {
-  background: var(--color-card);
+  background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   padding: 0.875rem 1rem;
+}
+
+.clue-card--clickable {
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.clue-card--clickable:hover {
+  border-color: var(--color-primary);
 }
 
 .clue-card__number {
@@ -622,7 +652,7 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.07em;
-  color: var(--color-muted);
+  color: var(--color-primary);
   margin-bottom: 0.3rem;
 }
 
