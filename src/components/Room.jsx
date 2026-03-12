@@ -1,3 +1,5 @@
+import CodeMirror from '@uiw/react-codemirror'
+import { python } from '@codemirror/lang-python'
 import TextChallenge from './TextChallenge'
 import PythonChallenge from './PythonChallenge'
 
@@ -34,9 +36,22 @@ export default function Room({ room, roomIndex, onSolved, solvedAnswers, savedAn
       <h2 className="room-card__title">{room.title}</h2>
       <p className="room-card__description">{descriptionText}</p>
 
-      {/* Code snippet — shown for text rooms only (python rooms use the editor) */}
+      {/* Code snippet — shown for text rooms as a read-only editor */}
       {room.type === 'text' && room.challenge !== null && (
-        <pre className="code-block">{room.challenge}</pre>
+        <div className="code-editor-wrap code-editor-wrap--disabled">
+          <CodeMirror
+            value={room.challenge}
+            extensions={[python()]}
+            editable={false}
+            basicSetup={{
+              lineNumbers: true,
+              foldGutter: false,
+              dropCursor: false,
+              allowMultipleSelections: false,
+              highlightActiveLine: false,
+            }}
+          />
+        </div>
       )}
 
       {/* Challenge component */}
