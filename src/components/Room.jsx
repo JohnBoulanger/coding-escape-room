@@ -1,5 +1,6 @@
 import CodeMirror from '@uiw/react-codemirror'
 import { python } from '@codemirror/lang-python'
+import { vscodeDark } from '@uiw/codemirror-theme-vscode'
 import TextChallenge from './TextChallenge'
 import PythonChallenge from './PythonChallenge'
 
@@ -41,6 +42,7 @@ export default function Room({ room, roomIndex, onSolved, solvedAnswers, savedAn
         <div className="code-editor-wrap code-editor-wrap--disabled">
           <CodeMirror
             value={room.challenge}
+            theme={vscodeDark}
             extensions={[python()]}
             editable={false}
             basicSetup={{

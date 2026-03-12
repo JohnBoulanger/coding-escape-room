@@ -299,36 +299,19 @@ body {
   pointer-events: none;
 }
 
-/* Dark theme for CodeMirror */
+/* CodeMirror sizing / focus */
 .code-editor-wrap .cm-editor {
   font-family: var(--font-mono);
   font-size: 0.83rem;
-  background: var(--color-code-bg);
-  color: var(--color-text);
 }
 
 .code-editor-wrap .cm-focused {
   outline: none;
 }
 
-.code-editor-wrap .cm-gutters {
-  background: #0e0f14;
-  border-right: 1px solid var(--color-border);
-  color: #363a4a;
-  font-size: 0.78rem;
-}
-
 .code-editor-wrap .cm-content {
   min-height: 160px;
   padding: 0.5rem 0;
-}
-
-.code-editor-wrap .cm-activeLine {
-  background: rgba(255, 255, 255, 0.03);
-}
-
-.code-editor-wrap .cm-activeLineGutter {
-  background: rgba(255, 255, 255, 0.04);
 }
 
 

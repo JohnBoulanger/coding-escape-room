@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import CodeMirror from '@uiw/react-codemirror'
 import { python } from '@codemirror/lang-python'
+import { vscodeDark } from '@uiw/codemirror-theme-vscode'
 import { runPython } from '../utils/piston'
 
 // ── PythonChallenge ────────────────────────────────────────────────────────────
@@ -71,6 +72,7 @@ export default function PythonChallenge({ room, onSolved, initialSolved = false 
       <div className={`code-editor-wrap${solved ? ' code-editor-wrap--disabled' : ''}`}>
         <CodeMirror
           value={userInput}
+          theme={vscodeDark}
           onChange={solved ? undefined : setUserInput}
           extensions={[python()]}
           editable={!solved}
