@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react'
 import { ROOMS } from './data/rooms'
 import StartPage from './components/StartPage'
 import NavBar from './components/NavBar'
-import MasterKey from './components/MasterKey'
 import Room from './components/Room'
+
+const CORRECT_CODE = '1407512837'
 
 // ── helpers ───────────────────────────────────────────────────────────────────
 function formatTime(seconds) {
@@ -27,8 +28,9 @@ export default function App() {
   const [viewingRoom, setViewingRoom]           = useState(0)
   const [highestUnlocked, setHighestUnlocked]   = useState(0)
   const [solvedAnswers, setSolvedAnswers]        = useState(Array(ROOMS.length).fill(null))
-  const [keyDigits, setKeyDigits]               = useState(Array(ROOMS.length).fill(null))
   const [timeLeft, setTimeLeft]                 = useState(30 * 60)
+  const [masterInput, setMasterInput]           = useState(Array(10).fill(''))
+  const [codeResult, setCodeResult]             = useState(null)
 
   // ── Timer ──────────────────────────────────────────────────────────────────
   // Starts when gameState becomes 'playing'. Counts down by 1 each second.
@@ -54,10 +56,9 @@ export default function App() {
   }
 
   // Called by a Room when the student submits the correct answer.
-  // Stores the answer and key digit, then advances to the next room.
+  // Stores the answer then advances to the next room.
   function handleRoomSolved(roomIndex, answer) {
     setSolvedAnswers(prev => prev.map((a, i) => i === roomIndex ? answer : a))
-    setKeyDigits(prev => prev.map((d, i) => i === roomIndex ? answer.slice(-1) : d))
 
     if (roomIndex === ROOMS.length - 1) {
       setGameState('complete')
@@ -72,6 +73,28 @@ export default function App() {
     if (i <= highestUnlocked) setViewingRoom(i)
   }
 
+  function handleDigitChange(index, value) {
+    const digit = value.replace(/\D/g, '').slice(-1)
+    setMasterInput(prev => prev.map((d, i) => i === index ? digit : d))
+    if (digit && index < 9) {
+      document.getElementById(`code-digit-${index + 1}`)?.focus()
+    }
+  }
+
+  function handleCodeSubmit(e) {
+    e.preventDefault()
+    setCodeResult(masterInput.join('') === CORRECT_CODE ? 'correct' : 'wrong')
+  }
+
+  function handleEnterReview() {
+    setViewingRoom(0)
+    setGameState('reviewing')
+  }
+
+  function handleExitReview() {
+    setGameState('complete')
+  }
+
   // ── Derived values ─────────────────────────────────────────────────────────
   const roomsSolved = solvedAnswers.filter(a => a !== null).length
   const isWarning   = timeLeft < 5 * 60   // < 5 minutes
@@ -83,24 +106,110 @@ export default function App() {
   }
 
   if (gameState === 'complete') {
+    const allFilled = masterInput.every(d => d !== '')
     return (
       <div className="app">
         <div className="app__inner">
           <div className="end-screen end-screen--success">
-            <p className="end-screen__heading">Vault Cracked</p>
+            <p className="end-screen__heading">Vault Unsealed</p>
             <p className="end-screen__body">
-              All 10 layers cleared. The safe is open. Walk out clean.
+              All 10 layers cleared. Time remaining: <strong>{formatTime(timeLeft)}</strong>
             </p>
-            <p className="end-screen__body" style={{ marginTop: '0.5rem' }}>
-              Time remaining: <strong>{formatTime(timeLeft)}</strong>
+            <p className="end-screen__body" style={{ marginTop: '0.375rem' }}>
+              Use the clues below to extract one digit from each layer. Enter them in order to open the master vault.
             </p>
-            <div className="end-screen__code-label">Master Vault Code</div>
-            <div className="end-screen__code">
-              {keyDigits.map((d, i) => (
-                <span key={i} className="end-screen__code-digit">{d}</span>
+
+            <form onSubmit={handleCodeSubmit}>
+              <div className="code-entry">
+                <div className="code-entry__label">Master Vault Code</div>
+                <div className="code-entry__slots">
+                  {masterInput.map((digit, i) => (
+                    <input
+                      key={i}
+                      id={`code-digit-${i}`}
+                      className={`code-entry__slot${codeResult === 'correct' ? ' code-entry__slot--correct' : ''}`}
+                      type="text"
+                      inputMode="numeric"
+                      maxLength={1}
+                      value={digit}
+                      onChange={e => handleDigitChange(i, e.target.value)}
+                      disabled={codeResult === 'correct'}
+                      autoComplete="off"
+                    />
+                  ))}
+                </div>
+                {codeResult === 'wrong' && (
+                  <p className="code-entry__feedback code-entry__feedback--wrong">
+                    Incorrect — check your extractions and try again.
+                  </p>
+                )}
+                {codeResult === 'correct' && (
+                  <p className="code-entry__feedback code-entry__feedback--correct">
+                    The code was  accepted and the vault is open. Take the money and get out!
+                  </p>
+                )}
+                {codeResult !== 'correct' && (
+                  <button
+                    className="challenge__submit-btn"
+                    type="submit"
+                    disabled={!allFilled}
+                  >
+                    Unlock Vault
+                  </button>
+                )}
+              </div>
+            </form>
+
+            <div className="clue-grid">
+              {ROOMS.map((room, i) => (
+                <div key={i} className="clue-card">
+                  <div className="clue-card__number">Layer {i + 1}</div>
+                  <div className="clue-card__title">{room.clue.title}</div>
+                  <div className="clue-card__hint">{room.clue.hint}</div>
+                </div>
               ))}
             </div>
+
+            <button
+              className="challenge__submit-btn"
+              style={{ marginTop: '1.5rem' }}
+              onClick={handleEnterReview}
+            >
+              Review Layers
+            </button>
           </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (gameState === 'reviewing') {
+    return (
+      <div className="app">
+        <div className="app__inner">
+          <header className="app__header">
+            <h1 className="app__title">The Heist</h1>
+            <button className="challenge__submit-btn" onClick={handleExitReview}>
+              ← Back to Results
+            </button>
+          </header>
+
+          <NavBar
+            rooms={ROOMS}
+            viewingRoom={viewingRoom}
+            highestUnlocked={highestUnlocked}
+            solvedAnswers={solvedAnswers}
+            onNavigate={handleNavigate}
+          />
+
+          <Room
+            key={viewingRoom}
+            room={ROOMS[viewingRoom]}
+            roomIndex={viewingRoom}
+            onSolved={handleRoomSolved}
+            solvedAnswers={solvedAnswers}
+            savedAnswer={solvedAnswers[viewingRoom]}
+          />
         </div>
       </div>
     )
@@ -115,21 +224,6 @@ export default function App() {
             <p className="end-screen__body">
               Time expired. {roomsSolved} of {ROOMS.length} layers cracked before the alarm hit.
             </p>
-            {roomsSolved > 0 && (
-              <>
-                <div className="end-screen__code-label">Partial Code Retrieved</div>
-                <div className="end-screen__code">
-                  {keyDigits.map((d, i) => (
-                    <span
-                      key={i}
-                      className={`end-screen__code-digit ${d === null ? 'end-screen__code-digit--hidden' : ''}`}
-                    >
-                      {d ?? '_'}
-                    </span>
-                  ))}
-                </div>
-              </>
-            )}
           </div>
         </div>
       </div>
@@ -157,9 +251,6 @@ export default function App() {
           solvedAnswers={solvedAnswers}
           onNavigate={handleNavigate}
         />
-
-        {/* Partial master key */}
-        <MasterKey keyDigits={keyDigits} />
 
         {/* Active room — keyed by viewingRoom so it remounts on navigation,
             resetting all local challenge state cleanly */}

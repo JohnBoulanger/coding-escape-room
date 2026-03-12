@@ -59,7 +59,7 @@ export default function PythonChallenge({ room, onSolved, initialSolved = false 
     } else {
       setFeedback({
         type: 'error',
-        message: `Output was "${result.stdout}", expected "${room.answer}".`,
+        message: `Output was "${result.stdout}" — check your logic and try again.`,
       })
       setShowHint(true)
     }
@@ -67,11 +67,6 @@ export default function PythonChallenge({ room, onSolved, initialSolved = false 
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="challenge__test-cases">
-        <div className="challenge__test-cases-label">Expected output</div>
-        <div className="challenge__test-case-row">{room.answer}</div>
-      </div>
-
       <label className="challenge__label">Your code</label>
       <div className={`code-editor-wrap${solved ? ' code-editor-wrap--disabled' : ''}`}>
         <CodeMirror

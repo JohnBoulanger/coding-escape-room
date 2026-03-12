@@ -523,3 +523,120 @@ body {
   color: #c4c9d4;
   border-color: var(--color-border);
 }
+
+/* ── Code entry (completion screen) ── */
+.code-entry {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.code-entry__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-muted);
+  margin-bottom: 0.625rem;
+}
+
+.code-entry__slots {
+  display: flex;
+  justify-content: center;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.code-entry__slot {
+  font-family: var(--font-mono);
+  font-size: 1.35rem;
+  font-weight: 700;
+  width: 44px;
+  height: 48px;
+  text-align: center;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  color: var(--color-text);
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.code-entry__slot:focus {
+  border-color: var(--color-primary);
+}
+
+.code-entry__slot:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.code-entry__slot--correct {
+  background: var(--color-success-bg);
+  border-color: var(--color-success-border);
+  color: var(--color-success-text);
+}
+
+.code-entry__feedback {
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+}
+
+.code-entry__feedback--wrong {
+  background: var(--color-error-bg);
+  color: var(--color-error-text);
+  border-color: var(--color-error-border);
+}
+
+.code-entry__feedback--correct {
+  background: var(--color-success-bg);
+  color: var(--color-success-text);
+  border-color: var(--color-success-border);
+}
+
+/* ── Clue grid (completion screen) ── */
+.clue-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+  text-align: left;
+}
+
+@media (max-width: 520px) {
+  .clue-grid { grid-template-columns: 1fr; }
+}
+
+.clue-card {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.875rem 1rem;
+}
+
+.clue-card__number {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-muted);
+  margin-bottom: 0.3rem;
+}
+
+.clue-card__title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 0.35rem;
+  line-height: 1.4;
+}
+
+.clue-card__hint {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  line-height: 1.5;
+  font-style: italic;
+}

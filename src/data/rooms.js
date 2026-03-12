@@ -4,8 +4,8 @@
 // Theme: You're locked inside Harrington Federal Vault. The job went sideways.
 // Crack 10 security layers in 30 minutes to assemble the master code and escape.
 //
-// Master override code: 2743916850
-// Key digit per room = answer.slice(-1) (last character of the correct answer)
+// Master override code: 1407512837
+// Extraction rule per room is hidden — students decode it from the clue cards on the final screen.
 //
 // Room types:
 //   'text'   — Python code shown as <pre>; student traces it and types the output
@@ -34,6 +34,10 @@ for i in range(0, len(codes), 2):
 print(total)`,
     answer: '182',
     hint: 'range(0, len(codes), 2) visits indices 0, 2, 4, 6. Only those elements are added to total.',
+    clue: {
+      title: 'The entrance remembers where it began.',
+      hint: 'Return to the first total. Strip it down to its foundation — the number that stands furthest left.',
+    },
   },
 
   // ── Room 2: The Cipher Fragment ───────────────────────────────────────────
@@ -55,6 +59,10 @@ for ch in word:
 print(decoded)`,
     answer: 'VAULT',
     hint: 'ord(ch) gives the ASCII value of a character. chr() converts a number back to a character. Work through each letter.',
+    clue: {
+      title: "The intercepted word wasn't random.",
+      hint: 'As you traveled deeper into the vault, the transmission became garbled once more. The message you same message you resolved was now RWQHP. How far has it shifted?',
+    },
   },
 
   // ── Room 3: The Pattern Check ─────────────────────────────────────────────
@@ -77,6 +85,10 @@ for i in range(len(levels)-1):
 print(valid)`,
     answer: 'False',
     hint: 'The loop checks each adjacent pair. If any element is not strictly greater than the one before it, valid changes. Does that ever happen here?',
+    clue: {
+      title: 'A false alarm still leaves a trace.',
+      hint: 'The hallway reading failed. Translate its result into the number a machine would store.',
+    },
   },
 
   // ── Room 4: The Sort Gate ─────────────────────────────────────────────────
@@ -102,6 +114,10 @@ print(arr)`,
     answer: '[3, 5, 2, 7]',
     normalizeWhitespace: true,
     hint: 'Step through each adjacent pair. When a swap happens, the array changes — and later comparisons use the updated array.',
+    clue: {
+      title: 'After one sweep, only the displaced matter.',
+      hint: 'From the partially sorted gate, find the element that moved the farthest from where it began.',
+    },
   },
 
   // ── Room 5: The Guard Count ───────────────────────────────────────────────
@@ -123,6 +139,10 @@ for i in range(len(guards) - 1):
 print(total)`,
     answer: '15',
     hint: 'Think carefully about which indices range() is actually visiting. Are all corridors being counted?',
+    clue: {
+      title: 'The corridors hide symmetry.',
+      hint: 'Take the patrol total. Multiply its digits together.',
+    },
   },
 
   // ── Room 6: The Max Detector ──────────────────────────────────────────────
@@ -147,6 +167,10 @@ print(total)`,
 print(find_max([8, 14, 11, 5, 21]))`,
     answer: '21',
     hint: 'Compare each element n to the current best m. Update m whenever a larger value is found.',
+    clue: {
+      title: 'The highest spike contains balance.',
+      hint: 'From the peak value, subtract its smallest digit from its largest digit.',
+    },
   },
 
   // ── Room 7: The Grid Counter ──────────────────────────────────────────────
@@ -168,6 +192,10 @@ for i in range(3):
 print(count)`,
     answer: '6',
     hint: 'Every time the inner loop body runs, count increases by 1. Work out how many times that happens in total.',
+    clue: {
+      title: 'Power scales faster than growth.',
+      hint: 'The grid sweep uses a nested loop. If its time complexity is written as O(n^k), what is k?',
+    },
   },
 
   // ── Room 8: The Threshold Filter ──────────────────────────────────────────
@@ -193,6 +221,10 @@ print(count)`,
 print(sum_above([5, 12, 3, 16, 7, 8, 10, 4], 9))`,
     answer: '38',
     hint: 'Only add n to total when n is strictly greater than threshold. Otherwise skip it.',
+    clue: {
+      title: 'The noise collapses inward.',
+      hint: 'The noise worsens as you enter the vault and the threshold lowers to 2. How many digits contribute to the total?',
+    },
   },
 
   // ── Room 9: The Running Total ─────────────────────────────────────────────
@@ -213,6 +245,10 @@ for n in nums:
 print(total)`,
     answer: '105',
     hint: 'Trace what total holds after each iteration. Think about what operation should be happening each step.',
+    clue: {
+      title: 'The accumulator stabilizes at equilibrium.',
+      hint: 'Count how many distinct digits appear in the final tally.',
+    },
   },
 
   // ── Room 10: The Prime Gate ───────────────────────────────────────────────
@@ -239,5 +275,9 @@ for i in range(2, 30):
 print(count)`,
     answer: '10',
     hint: 'A prime is divisible only by 1 and itself. Test every integer from 2 up to n-1 as a potential divisor. Return False immediately if any divides evenly.',
+    clue: {
+      title: 'Prime signals leave no remainder.',
+      hint: 'Your final algorithm brought you into the vault room. What is the sum of the prime factors of your result?',
+    },
   },
 ]

@@ -15,16 +15,17 @@ export default function StartPage({ onStart }) {
 
           <div className="start-page__story">
             <p>
-              You're inside. The job went sideways.
+              The plan to break into the Harrington Federal Vault had been in motion for months,
+              but the window of opportunity was short. A scheduled system maintenance cycle would
+              leave the vault vulnerable for only 30 minutes before the security network reset
+              and locked everything down again.
             </p>
             <p>
-              Security activated the moment you touched the outer door.
-              The vault has 10 layers — each one locked behind a code puzzle.
-              Crack them all to reach the safe and get out.
-            </p>
-            <p>
-              Each layer you crack reveals one digit of the master vault code.
-              Collect all 10. Open the safe. Walk out clean.
+              The upgraded protection system replaced traditional locks with a series of digital
+              safeguards, each controlled by code that had to be solved in the correct order.
+              To complete the heist before time ran out, the team would need to work through
+              every puzzle, disable the security one layer at a time, and recover the master
+              code required to open the Harrington Federal Vault.
             </p>
             <p className="start-page__warning">
               The silent alarm trips in <strong>30 minutes</strong>.
