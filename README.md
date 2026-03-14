@@ -1,8 +1,8 @@
-# The Harrington Heist — Coding Escape Room
+# The Bank Heist — Coding Escape Room
 
 A 10-room browser-based coding escape room for Grade 11 Computer Science (ICS3U).
 
-Students have **30 minutes** to crack 10 security layers inside Harrington Federal Vault by tracing and fixing Python code. Each layer reveals a hidden digit; all 10 together form the master vault code.
+Students have **30 minutes** to crack 10 security layers inside TDs Federal Vault by tracing and fixing Python code. Each layer reveals a hidden digit; all 10 together form the master vault code.
 
 ---
 

@@ -2,7 +2,7 @@
 
 ## Project Summary
 React + Vite web app. A 10-room themed escape room for Grade 11 CS students (ICS3U).
-Theme: **The Heist — Harrington Federal Vault** — vault job goes sideways, students have
+Theme: **The Heist — TD Federal Vault** — vault job goes sideways, students have
 30 minutes to crack 10 security layers and assemble the 10-digit master vault code.
 
 ## Stack
@@ -67,8 +67,6 @@ timeLeft         // seconds remaining (30 * 60 on start)
 | 8 | The Threshold Filter | python fill | Complete sum_above; sum elements > threshold | `38` | 8 |
 | 9 | The Running Total | python debug | Fix accumulator bug: `=` instead of `+=` | `105` | 5 |
 | 10 | The Prime Gate | python fill | Complete is_prime; count primes in range(2,30) | `10` | 0 |
-
-**Master vault code: 2Te]516850**
 
 ### Chained Rooms
 - Room 5 description references `answers[0]` (Room 1 answer = `"182"`)

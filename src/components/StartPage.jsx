@@ -10,25 +10,28 @@ export default function StartPage({ onStart }) {
       <div className="app__inner">
         <div className="start-page">
 
-          <h1 className="start-page__title">The Harrington Heist</h1>
-          <p className="start-page__subtitle">Harrington Federal Vault</p>
+          <h1 className="start-page__title">The Bank Heist</h1>
+          <p className="start-page__subtitle">TD Bank – Toronto Main Vault</p>
 
           <div className="start-page__story">
             <p>
-              The plan to break into the Harrington Federal Vault had been in motion for months,
-              but the window of opportunity was short. A scheduled system maintenance cycle would
-              leave the vault vulnerable for only 30 minutes before the security network reset
-              and locked everything down again.
+              You and your team were positioned outside the main TD Bank vault in Toronto,
+              preparing to break in during a short maintenance window. Once inside, a silent
+              alarm would trigger and give you exactly 30 minutes before the system locked
+              the entire building down. Red lights would flash across the control panels,
+              security doors would begin sealing floor by floor, and your team would be
+              trapped unless you disabled the vault from the inside. While they handled
+              the physical entry, you were connected remotely to the vault’s digital core.
             </p>
             <p>
-              The upgraded protection system replaced traditional locks with a series of digital
-              safeguards, each controlled by code that had to be solved in the correct order.
-              To complete the heist before time ran out, the team would need to work through
-              every puzzle, disable the security one layer at a time, and recover the master
-              code required to open the Harrington Federal Vault.
+              The vault itself was locked behind layers of software protection. Ten separate
+              security systems stood between your team and the central lock mechanism.
+              Each layer required you to understand the code controlling it and disable
+              the safeguard before the next one would unlock. Every solved layer revealed
+              part of a hidden master override sequence.
             </p>
             <p className="start-page__warning">
-              The silent alarm trips in <strong>30 minutes</strong>.
+              The full lockdown activates in <strong>30 minutes</strong>.
             </p>
           </div>
 
