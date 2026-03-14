@@ -36,7 +36,7 @@ export default function App() {
   // Starts when gameState becomes 'playing'. Counts down by 1 each second.
   // At zero, transitions to 'timeout'.
   useEffect(() => {
-    if (gameState !== 'playing') return
+    if (gameState !== 'playing' && gameState !== 'complete') return
     const tick = setInterval(() => {
       setTimeLeft(prev => {
         if (prev <= 1) {
@@ -83,7 +83,9 @@ export default function App() {
 
   function handleCodeSubmit(e) {
     e.preventDefault()
-    setCodeResult(masterInput.join('') === CORRECT_CODE ? 'correct' : 'wrong')
+    const result = masterInput.join('') === CORRECT_CODE ? 'correct' : 'wrong'
+    setCodeResult(result)
+    if (result === 'correct') setGameState('solved')
   }
 
 function handleExitReview() {
@@ -108,7 +110,7 @@ function handleExitReview() {
           <div className="end-screen end-screen--success">
             <p className="end-screen__heading">Vault Unsealed</p>
             <p className="end-screen__body">
-              All 10 layers cleared. Time remaining: <strong>{formatTime(timeLeft)}</strong>
+              All 10 layers cleared. Time remaining: <strong className={isWarning ? 'timer--warning' : ''}>{formatTime(timeLeft)}</strong>
             </p>
             <p className="end-screen__body" style={{ marginTop: '0.375rem' }}>
               Use the clues below to extract one digit from each layer. Enter them in order to open the master vault.
@@ -128,7 +130,6 @@ function handleExitReview() {
                       maxLength={1}
                       value={digit}
                       onChange={e => handleDigitChange(i, e.target.value)}
-                      disabled={codeResult === 'correct'}
                       autoComplete="off"
                     />
                   ))}
@@ -138,20 +139,13 @@ function handleExitReview() {
                     Incorrect — check your extractions and try again.
                   </p>
                 )}
-                {codeResult === 'correct' && (
-                  <p className="code-entry__feedback code-entry__feedback--correct">
-                    The code was  accepted and the vault is open. Take the money and get out!
-                  </p>
-                )}
-                {codeResult !== 'correct' && (
-                  <button
-                    className="challenge__submit-btn"
-                    type="submit"
-                    disabled={!allFilled}
-                  >
-                    Unlock Vault
-                  </button>
-                )}
+                <button
+                  className="challenge__submit-btn"
+                  type="submit"
+                  disabled={!allFilled}
+                >
+                  Unlock Vault
+                </button>
               </div>
             </form>
 
@@ -201,6 +195,21 @@ function handleExitReview() {
             solvedAnswers={solvedAnswers}
             savedAnswer={solvedAnswers[viewingRoom]}
           />
+        </div>
+      </div>
+    )
+  }
+
+  if (gameState === 'solved') {
+    return (
+      <div className="app">
+        <div className="app__inner">
+          <div className="end-screen end-screen--success">
+            <p className="end-screen__heading">Vault Open!</p>
+            <p className="end-screen__body">
+              Code accepted. You cracked the vault with <strong>{formatTime(timeLeft)}</strong> to spare. Take the money and get out!
+            </p>
+          </div>
         </div>
       </div>
     )
