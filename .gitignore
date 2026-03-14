@@ -31,3 +31,4 @@ pnpm-debug.log*
 
 # mds
 CLAUDE.md
+.vercel
