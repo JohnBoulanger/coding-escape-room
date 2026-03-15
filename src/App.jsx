@@ -4,7 +4,7 @@ import StartPage from './components/StartPage'
 import NavBar from './components/NavBar'
 import Room from './components/Room'
 
-const CORRECT_CODE = '1407512837'
+const CORRECT_CODE = '2437422627'
 
 // ── helpers ───────────────────────────────────────────────────────────────────
 function formatTime(seconds) {
@@ -31,6 +31,7 @@ export default function App() {
   const [timeLeft, setTimeLeft]                 = useState(30 * 60)
   const [masterInput, setMasterInput]           = useState(Array(10).fill(''))
   const [codeResult, setCodeResult]             = useState(null)
+  const [savedCodes, setSavedCodes]             = useState(Array(ROOMS.length).fill(null))
 
   // ── Timer ──────────────────────────────────────────────────────────────────
   // Starts when gameState becomes 'playing'. Counts down by 1 each second.
@@ -194,6 +195,8 @@ function handleExitReview() {
             onSolved={handleRoomSolved}
             solvedAnswers={solvedAnswers}
             savedAnswer={solvedAnswers[viewingRoom]}
+            savedCode={savedCodes[viewingRoom]}
+            onCodeChange={code => setSavedCodes(prev => prev.map((c, i) => i === viewingRoom ? code : c))}
           />
         </div>
       </div>
@@ -261,6 +264,8 @@ function handleExitReview() {
           onSolved={handleRoomSolved}
           solvedAnswers={solvedAnswers}
           savedAnswer={solvedAnswers[viewingRoom]}
+          savedCode={savedCodes[viewingRoom]}
+          onCodeChange={code => setSavedCodes(prev => prev.map((c, i) => i === viewingRoom ? code : c))}
         />
 
       </div>

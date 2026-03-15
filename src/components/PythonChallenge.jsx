@@ -18,8 +18,8 @@ import { runPython } from '../utils/piston'
 //   onSolved      – (answer: string) => void, called once after output matches
 //   initialSolved – true when navigating back to an already-completed room
 
-export default function PythonChallenge({ room, onSolved, initialSolved = false }) {
-  const [userInput, setUserInput] = useState(room.challenge)
+export default function PythonChallenge({ room, onSolved, initialSolved = false, savedCode = null, onCodeChange }) {
+  const [userInput, setUserInput] = useState(savedCode ?? room.challenge)
   const [feedback, setFeedback]   = useState(
     initialSolved ? { type: 'success', message: room.answer } : null
   )
@@ -73,7 +73,7 @@ export default function PythonChallenge({ room, onSolved, initialSolved = false 
         <CodeMirror
           value={userInput}
           theme={vscodeDark}
-          onChange={solved ? undefined : setUserInput}
+          onChange={solved ? undefined : (val) => { setUserInput(val); onCodeChange?.(val) }}
           extensions={[python()]}
           editable={!solved}
           basicSetup={{

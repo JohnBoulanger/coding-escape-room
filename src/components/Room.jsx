@@ -19,7 +19,7 @@ import PythonChallenge from './PythonChallenge'
 //   solvedAnswers – full array of answers, used for dynamic descriptions
 //   savedAnswer  – the student's saved answer, or null if unsolved
 
-export default function Room({ room, roomIndex, onSolved, solvedAnswers, savedAnswer }) {
+export default function Room({ room, roomIndex, onSolved, solvedAnswers, savedAnswer, savedCode, onCodeChange }) {
   const isSolved = savedAnswer !== null
 
   // description can be a plain string or a function that takes solvedAnswers
@@ -69,6 +69,8 @@ export default function Room({ room, roomIndex, onSolved, solvedAnswers, savedAn
           room={room}
           onSolved={handleSolved}
           initialSolved={isSolved}
+          savedCode={savedCode}
+          onCodeChange={onCodeChange}
         />
       )}
     </div>

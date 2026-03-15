@@ -8,7 +8,7 @@ export const ROOMS = [
     description:
       'The outer lobby doors are sealed. The ID card reader is misreading your fake access cards ' +
       'and only checking every other swipe. If the total doesn\'t match the expected audit number, ' +
-      'the doors stay locked. Which IDs is it reading',
+      'the doors stay locked. Which IDs are being read into the total?',
     type: 'text',
     challenge:
 `ids = [14, 23, 31, 42, 58, 67, 79]
@@ -19,8 +19,8 @@ print(total)`,
     answer: '182',
     hint: 'range(0, len(ids), 2) visits indices 0, 2, 4, 6. Only those elements are added to total.',
     clue: {
-      title: 'Back to square one',
-      hint: 'Return to the first total. Strip it down to its foundation and enter the most significant digit.',
+      title: 'Factor Check',
+      hint: 'The turnstile has a secondary filter: it only trusts IDs that are exact multiples of 7. How many of the IDs in the original list would pass this filter?',
     },
   },
 
@@ -55,7 +55,7 @@ print(decoded)`,
     id: 3,
     title: 'Layer 3 — Clearance Check',
     description:
-      'The vault requires each stage of the entry sequence to increase in clearance level. If at any point a lower clearance appears after a higher one, the system rejects the attempt. Does the vault accept this sequence? ',
+      'The vault requires each stage of the entry sequence to increase in clearance level. Does the vault accept this sequence? ',
     type: 'text',
     challenge:
 `levels = [3, 5, 7, 6, 9]
@@ -67,8 +67,8 @@ print(valid)`,
     answer: 'False',
     hint: 'The loop checks each adjacent pair. If any element is not strictly greater than the one before it, valid changes. Does that ever happen here?',
     clue: {
-      title: 'A false alarm',
-      hint: 'The hallway reading failed. Translate its result into the number a computer would store.',
+      title: 'Pair Audit',
+      hint: 'The validator scanned every adjacent pair in the sequence. Count how many of those pairs were already in strictly increasing order.',
     },
   },
 
@@ -108,7 +108,7 @@ print(arr)`,
     title: 'Layer 5 — The Patrol Ledger',
     description:
       'A digital ledger tracks how many guards are posted across each corridor. ' +
-      'The current tally is off, and the system won\'t clear the alert until the count reflects every single hallway. Fix the code so it counts all the guards.',
+      'The current tally is off, and the system won\'t clear the alert until the count reads from every single hallway. Fix the code so it counts all the guards.',
     type: 'python',
     challenge:
 `guards = [3, 1, 4, 2, 5]
@@ -119,8 +119,8 @@ print(total)`,
     answer: '15',
     hint: 'Think carefully about which indices range() is actually visiting. Are all corridors being counted?',
     clue: {
-      title: 'A highly protected vault',
-      hint: 'Take the patrol total. Multiply its digits together.',
+      title: 'The Excluded Index',
+      hint: 'The bug caused exactly one corridor to be skipped entirely. What is the 0-based index of the corridor that was never counted in the original buggy code?',
     },
   },
 
@@ -147,8 +147,8 @@ print(find_max([8, 14, 11, 5, 21]))`,
     answer: '21',
     hint: 'Compare each element n to the current best m. Update m whenever a larger value is found.',
     clue: {
-      title: 'Balance the voltage spike',
-      hint: 'You were able to determine the power grids highest surge, subtract its smallest digit from its largest digit.',
+      title: 'Tracker Updates',
+      hint: 'As the detector scanned each reading from left to right, how many times did the tracked maximum actually change to a new, higher value?',
     },
   },
 
@@ -200,8 +200,8 @@ print(sum_above([5, 12, 3, 16, 7, 8, 10, 4], 9))`,
     answer: '38',
     hint: 'Only add n to total when n is strictly greater than threshold. Otherwise skip it.',
     clue: {
-      title: 'Losing signal',
-      hint: 'The noise worsens as you enter the vault and the threshold lowers to 2. How many numbers contribute to the total now?',
+      title: 'Tightening the Filter',
+      hint: 'Security hardens: the threshold rises from 9 to 10. Using the original list, how many values would now FAIL the filter?',
     },
   },
 
@@ -214,7 +214,7 @@ print(sum_above([5, 12, 3, 16, 7, 8, 10, 4], 9))`,
     description:
       'Your team reaches the final security checkpoint before the vault core. ' +
       'The system requires both a valid override code and biometric confirmation before it will proceed. ' +
-      'Right now, the authorization logic is flawed. Correct it so access is only granted when both conditions are satisfied.',
+      'Right now, the authorization logic is flawed. Update the code so it achieves the correct behaviour.',
     type: 'python',
     challenge:
 `code_verified = True
@@ -227,8 +227,8 @@ else:
     answer: 'ACCESS DENIED',
     hint: 'Think carefully about the difference between logical AND and OR. When should access truly be granted?',
     clue: {
-      title: 'Two keys. One door.',
-      hint: 'Count how many logical conditions must be true for access to be granted.',
+      title: 'Operator Precedence',
+      hint: "Python has three logical operators: `not`, `and`, and `or`. How many of them rank higher in Python's operator precedence table than `or`?",
     },
   },
 
@@ -240,7 +240,7 @@ else:
     title: 'Layer 10 — The Master Override Console',
     description:
       'The final console accepts only prime-coded signals. Every other input is rejected instantly. ' +
-      'Only once the correct number of valid signals is recognized will the vault release the override sequence. Complete the code to gain access to the vault room.',
+      'Complete the code determine which signals can be sent to gain access to the vault room.',
     type: 'python',
     challenge:
 `def is_prime(n):
