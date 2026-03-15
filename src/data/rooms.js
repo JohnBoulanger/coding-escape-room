@@ -4,9 +4,9 @@ export const ROOMS = [
   // Even-indexed elements: codes[0,2,4,6] = 14+31+58+79 = 182
   {
     id: 1,
-    title: 'Layer 1 — The Entry Turnstile',
+    title: 'Layer 1 — The Entry',
     description:
-      'The outer lobby doors are sealed. The ID card reader is misreading access cards ' +
+      'The outer lobby doors are sealed. The ID card reader is misreading your fake access cards ' +
       'and only checking every other swipe. If the total doesn\'t match the expected audit number, ' +
       'the doors stay locked. Which IDs is it reading',
     type: 'text',
@@ -29,7 +29,7 @@ print(total)`,
   // "WBVMU": each char shifted -1 → V(86), A(65), U(85), L(76), T(84) → "VAULT"
   {
     id: 2,
-    title: 'Layer 2 — The Radio Intercept',
+    title: 'Layer 2 — Radio Chatter',
     description:
       'A garbled transmission from inside the vault repeats a five-letter word. ' +
       'Someone shifted its characters it to hide the message. The following code restores the original signal before the guards rotate frequencies. What did they say?',
@@ -43,7 +43,7 @@ print(decoded)`,
     answer: 'VAULT',
     hint: 'ord(ch) gives the ASCII value of a character. chr() converts a number back to a character. Work through each letter.',
     clue: {
-      title: "The intercepted word wasn't random",
+      title: "Shifty Transmission",
       hint: 'As you traveled deeper into the vault, the transmission became garbled once more. The same message you resolved was now RWQHP. How far has it shifted?',
     },
   },
@@ -53,7 +53,7 @@ print(decoded)`,
   // levels[2]=7 > levels[3]=6 → valid becomes False, loop continues but never resets
   {
     id: 3,
-    title: 'Layer 3 — The Hallway Stabilizer',
+    title: 'Layer 3 — Clearance Check',
     description:
       'The vault requires each stage of the entry sequence to increase in clearance level. If at any point a lower clearance appears after a higher one, the system rejects the attempt. Does the vault accept this sequence? ',
     type: 'text',
@@ -67,7 +67,7 @@ print(valid)`,
     answer: 'False',
     hint: 'The loop checks each adjacent pair. If any element is not strictly greater than the one before it, valid changes. Does that ever happen here?',
     clue: {
-      title: 'A false alarm left a trace!',
+      title: 'A false alarm',
       hint: 'The hallway reading failed. Translate its result into the number a computer would store.',
     },
   },
@@ -80,10 +80,10 @@ print(valid)`,
   //   i=2: 7>2 → swap → [3, 5, 2, 7]
   {
     id: 4,
-    title: 'Layer 4 — The Queue Regulator',
-    description:
-      'The internal access queue corrects itself with a single sweep before admitting personnel. ' +
-      'After one adjustment cycle, the order stabilizes, at least partially. What does the queue look like now?',
+    title: 'Layer 4 — The Clearance Buffer',
+    description: 'Your team has bypassed the outer security and reached an internal staging system. ' +
+      'Before moving deeper, the vault runs a quick reordering cycle on its clearance buffer. ' + 
+      'After this single pass through the system, what order does the buffer hold?',
     type: 'text',
     challenge:
 `arr = [7, 3, 5, 2]
@@ -132,7 +132,7 @@ print(total)`,
     title: 'Layer 6 — The Voltage Spike Detector',
     description:
       'The vault\'s internal power grid monitors its highest surge to prevent overload. ' +
-      'It scans the recent readings and locks onto the peak value. Identify the spike before the breakers trip.',
+      'It scans the recent readings and locks onto the peak value. Identify the spike before the breakers trip and sound an alarm.',
     type: 'python',
     challenge:
 `def find_max(nums):
@@ -157,10 +157,10 @@ print(find_max([8, 14, 11, 5, 21]))`,
   // Outer loop: 3 iterations × inner loop: 2 iterations = 6 total increments
   {
     id: 7,
-    title: 'Layer 7 — The Security Sweep Matrix',
-    description:
-      'A sweeping algorithm checks every zone intersection inside the core chamber. ' +
-      'Each sweep increments a counter for every zone armed. How many are armed?',
+    title: 'Layer 7 — The Vault Grid Scan',
+    description: 'Before reaching the inner vault, the system runs a grid scan across its remaining defenses. ' +
+    'Each intersection is checked in sequence, and every check increases the armed counter. ' +
+    'After the scan completes, what number is displayed?',
     type: 'text',
     challenge:
 `count = 0
@@ -185,7 +185,7 @@ print(count)`,
     title: 'Layer 8 — The Threshold Filter',
     description:
       'Inside the vault\'s inner chamber, the communication feed is full of background interference. ' +
-      'The system only tallies signals that rise above the noise threshold. Isolate the meaningful transmissions and find their sum to decipher it.',
+      'The system only reads signals that rise above the noise threshold. Isolate the meaningful transmissions and find their sum to decipher it.',
     type: 'python',
     challenge:
 `def sum_above(nums, threshold):
@@ -210,22 +210,25 @@ print(sum_above([5, 12, 3, 16, 7, 8, 10, 4], 9))`,
   // 5+10+15+20+25+30 = 105
   {
     id: 9,
-    title: 'Layer 9 — The Gold Counter',
+    title: 'Layer 9 — The Dual-Key Authorization',
     description:
-      'The internal counter that tracks asset transfers is malfunctioning. ' +
-      'Fix the logic before the final chamber refuses access.',
+      'Your team reaches the final security checkpoint before the vault core. ' +
+      'The system requires both a valid override code and biometric confirmation before it will proceed. ' +
+      'Right now, the authorization logic is flawed. Correct it so access is only granted when both conditions are satisfied.',
     type: 'python',
     challenge:
-`nums = [5, 10, 15, 20, 25, 30]
-total = 0
-for n in nums:
-    total = n
-print(total)`,
-    answer: '105',
-    hint: 'Trace what total holds after each iteration. Think about what operation should be happening each step.',
+`code_verified = True
+biometric_verified = False
+
+if code_verified or biometric_verified:
+    print("ACCESS GRANTED")
+else:
+    print("ACCESS DENIED")`,
+    answer: 'ACCESS DENIED',
+    hint: 'Think carefully about the difference between logical AND and OR. When should access truly be granted?',
     clue: {
-      title: 'Thats a lot of money!',
-      hint: 'Count how many distinct digits appear in the final amount.',
+      title: 'Two keys. One door.',
+      hint: 'Count how many logical conditions must be true for access to be granted.',
     },
   },
 
