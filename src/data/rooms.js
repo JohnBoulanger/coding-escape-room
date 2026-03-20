@@ -55,7 +55,7 @@ print(decoded)`,
     id: 3,
     title: 'Layer 3 — Clearance Check',
     description:
-      'The vault requires each stage of the entry sequence to increase in clearance level. Does the vault accept this sequence? ',
+      'The vault requires each stage of the input sequence to increase in clearance level. Does the vault accept this sequence? ',
     type: 'text',
     challenge:
 `levels = [3, 5, 7, 6, 9]
@@ -81,7 +81,7 @@ print(valid)`,
   {
     id: 4,
     title: 'Layer 4 — The Clearance Buffer',
-    description: 'Your team has bypassed the outer security and reached an internal staging system. ' +
+    description: 'Your team has bypassed the outer security and reached an internal security systems room. ' +
       'Before moving deeper, the vault runs a quick reordering cycle on its clearance buffer. ' + 
       'After this single pass through the system, what order does the buffer hold?',
     type: 'text',
@@ -107,8 +107,8 @@ print(arr)`,
     id: 5,
     title: 'Layer 5 — The Patrol Ledger',
     description:
-      'A digital ledger tracks how many guards are posted across each corridor. ' +
-      'The current tally is off, and the system won\'t clear the alert until the count reads from every single hallway. Fix the code so it counts all the guards.',
+      'A digital ledger tracks how many guards are in each corridor. ' +
+      'The current total is off, and the system won\'t clear the alert until the count reads correctly from every single hallway. Fix the code so it counts all the guards.',
     type: 'python',
     challenge:
 `guards = [3, 1, 4, 2, 5]
@@ -131,8 +131,8 @@ print(total)`,
     id: 6,
     title: 'Layer 6 — The Voltage Spike Detector',
     description:
-      'The vault\'s internal power grid monitors its highest surge to prevent overload. ' +
-      'It scans the recent readings and locks onto the peak value. Identify the spike before the breakers trip and sound an alarm.',
+      'The vault\'s internal power grid monitors its highest power surge to prevent overload. ' +
+      'It\'s supposed to scan the recent readings and lock in the peak value. Write some code to identify the spike before the breakers trip and sound an alarm.',
     type: 'python',
     challenge:
 `def find_max(nums):
@@ -159,7 +159,7 @@ print(find_max([8, 14, 11, 5, 21]))`,
     id: 7,
     title: 'Layer 7 — The Vault Grid Scan',
     description: 'Before reaching the inner vault, the system runs a grid scan across its remaining defenses. ' +
-    'Each intersection is checked in sequence, and every check increases the armed counter. ' +
+    'Each intersection is checked in sequence, and every check increases the total counter. ' +
     'After the scan completes, what number is displayed?',
     type: 'text',
     challenge:
