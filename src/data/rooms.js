@@ -7,8 +7,8 @@ export const ROOMS = [
     title: 'Layer 1 — The Entry',
     description:
       'The outer lobby doors are sealed. The ID card reader is misreading your fake access cards ' +
-      'and only checking every other swipe. If the total doesn\'t match the expected audit number, ' +
-      'the doors stay locked. Which IDs are being read into the total?',
+      'and only checking every other swipe. If the total doesn\'t match the expected total, ' +
+      'the doors stay locked. What is the total?',
     type: 'text',
     challenge:
 `ids = [14, 23, 31, 42, 58, 67, 79]
